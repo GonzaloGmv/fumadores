@@ -30,20 +30,3 @@ def agente():
         print("El agente ha puesto el", ingredientes[ingrediente_disponible], "sobre la mesa.")
         mutex.release()
         semaforo.release()
-
-hilos_fumadores = []
-for i in range(3):
-    hilo = threading.Thread(target=fumador, args=(i,))
-    hilos_fumadores.append(hilo)
-
-hilo_agente = threading.Thread(target=agente)
-
-for hilo in hilos_fumadores:
-    hilo.start()
-
-hilo_agente.start()
-
-for hilo in hilos_fumadores:
-    hilo.join()
-
-hilo_agente.join()
