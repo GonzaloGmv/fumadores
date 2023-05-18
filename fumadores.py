@@ -2,24 +2,26 @@ import threading
 import time
 import random
 
-
 ingredientes = ["tabaco", "papel", "cerillas", "filtros", "green"]
 mutex = threading.Semaphore(1)
-semaforo = threading.Semaphore(0)
-ingrediente_disponible = None
+semaforos_ingredientes = [threading.Semaphore(0) for _ in range(5)]
 
 def fumador(id_fumador):
     while True:
-        semaforo.acquire()
+        semaforos_ingredientes[id_fumador].acquire()
+        mutex.acquire()
         print("El fumador", id_fumador, "ha comenzado a fumar.")
-        time.sleep(1)  # Simulación de tiempo fumando
+        mutex.release()
+        time.sleep(1) 
+        mutex.acquire()
         print("El fumador", id_fumador, "ha terminado de fumar.")
+        mutex.release()
 
-# Función para el agente
 def agente():
     while True:
         mutex.acquire()
-        ingrediente_disponible = random.randint(0, 4)
-        print("El agente ha puesto el", ingredientes[ingrediente_disponible], "sobre la mesa.")
+        ingredientes_disponibles = random.sample(range(5), 2)
+        for i in ingredientes_disponibles:
+            semaforos_ingredientes[i].acquire()
         mutex.release()
-        semaforo.release()
+        time.sleep(1)
