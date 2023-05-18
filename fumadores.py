@@ -9,21 +9,14 @@ semaforo = threading.Semaphore(0)
 ingrediente_disponible = None
 
 def fumador(id_fumador):
-    global ingrediente_disponible
     while True:
         semaforo.acquire()
-        mutex.acquire()
-        if ingrediente_disponible == id_fumador:
-            print("El fumador", id_fumador, "ha comenzado a fumar.")
-            ingrediente_disponible = None
-        mutex.release()
+        print("El fumador", id_fumador, "ha comenzado a fumar.")
         time.sleep(1)  # Simulación de tiempo fumando
-        mutex.acquire()
         print("El fumador", id_fumador, "ha terminado de fumar.")
-        mutex.release()
 
+# Función para el agente
 def agente():
-    global ingrediente_disponible
     while True:
         mutex.acquire()
         ingrediente_disponible = random.randint(0, 2)
