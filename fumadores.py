@@ -3,7 +3,7 @@ import time
 import random
 
 
-ingredientes = ["tabaco", "papel", "cerillas"]
+ingredientes = ["tabaco", "papel", "cerillas", "filtros", "green"]
 mutex = threading.Semaphore(1)
 semaforo = threading.Semaphore(0)
 ingrediente_disponible = None

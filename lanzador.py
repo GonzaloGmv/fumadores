@@ -2,7 +2,7 @@ from fumadores import *
 
 def main():
     hilos_fumadores = []
-    for i in range(3):
+    for i in range(5):
         hilo = threading.Thread(target=fumador, args=(i,))
         hilos_fumadores.append(hilo)
 
