@@ -22,6 +22,6 @@ def agente():
         mutex.acquire()
         ingredientes_disponibles = random.sample(range(5), 2)
         for i in ingredientes_disponibles:
-            semaforos_ingredientes[i].acquire()
+            semaforos_ingredientes[i].release()
         mutex.release()
         time.sleep(1)
