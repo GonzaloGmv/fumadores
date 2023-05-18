@@ -19,7 +19,7 @@ def fumador(id_fumador):
 def agente():
     while True:
         mutex.acquire()
-        ingrediente_disponible = random.randint(0, 2)
+        ingrediente_disponible = random.randint(0, 4)
         print("El agente ha puesto el", ingredientes[ingrediente_disponible], "sobre la mesa.")
         mutex.release()
         semaforo.release()
